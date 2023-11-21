@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task_manager/ui/screens/forgot_password_screen.dart';
-import 'package:task_manager/ui/screens/signup_screen.dart';
+import 'package:task_manager/ui/screens/login_screen.dart';
 import 'package:task_manager/ui/widgets/bodybackground.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BodyBackground(
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(24.0),
-            child: SingleChildScrollView(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -27,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 80,
                   ),
                   Text(
-                    "Get Started with",
+                    "Join With US",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
@@ -37,6 +36,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: 'Email',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    // keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hintText: 'Frist Name',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),TextFormField(
+                    // keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hintText: 'Last Name',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),TextFormField(
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      hintText: 'Mobile',
                     ),
                   ),
                   const SizedBox(
@@ -61,28 +85,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 48,
                   ),
-                  Center(
-                      child: TextButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Forgot_Password_Screen(),),);
-                          },
-                          child: Text(
-                            'Forgot Password?',
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
-                          ))),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Dont Hava An Account",
+                        "Hava An Account",
                         style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpScreen(),),);
+                          Navigator.pop(context);
+
                         },
                         child: Text(
-                          'Sign Up',
+                          'Sign In',
                           style: TextStyle(color: Colors.green, fontSize: 16),
                         ),
                       )

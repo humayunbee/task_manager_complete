@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task_manager/ui/screens/forgot_password_screen.dart';
+import 'package:task_manager/ui/screens/pin_verification_screen.dart';
 import 'package:task_manager/ui/screens/signup_screen.dart';
 import 'package:task_manager/ui/widgets/bodybackground.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class Forgot_Password_Screen extends StatefulWidget {
+  const Forgot_Password_Screen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<Forgot_Password_Screen> createState() => _Forgot_Password_ScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _Forgot_Password_ScreenState extends State<Forgot_Password_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +27,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 80,
                   ),
                   Text(
-                    "Get Started with",
+                    "Your Email Address",
                     style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    "A 6 digit OTP Will be Sent to your email Address",
+                    style: TextStyle(fontSize: 14,color: Colors.grey,fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 16,
@@ -42,47 +49,35 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                    ),
-                  ),
                   const SizedBox(
                     height: 16,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Pin_verification_Screen(),),);
+
+                      },
                       child: Icon(Icons.arrow_circle_right_outlined),
                     ),
                   ),
                   const SizedBox(
                     height: 48,
                   ),
-                  Center(
-                      child: TextButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Forgot_Password_Screen(),),);
-                          },
-                          child: Text(
-                            'Forgot Password?',
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
-                          ))),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Dont Hava An Account",
+                        "Hava An Account",
                         style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpScreen(),),);
+                          Navigator.pop(context);
                         },
                         child: Text(
-                          'Sign Up',
+                          'Sign in',
                           style: TextStyle(color: Colors.green, fontSize: 16),
                         ),
                       )
