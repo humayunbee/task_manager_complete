@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_manager/ui/screens/forgot_password_screen.dart';
+import 'package:task_manager/ui/screens/main_bottom_nev_screen.dart';
 import 'package:task_manager/ui/screens/signup_screen.dart';
 import 'package:task_manager/ui/widgets/bodybackground.dart';
 
@@ -54,7 +55,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MainBottomNevScreen(),),);
+
+
+                      },
                       child: Icon(Icons.arrow_circle_right_outlined),
                     ),
                   ),
