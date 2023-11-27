@@ -24,7 +24,7 @@ final bool enableOnTap;
         'Rabill@gmail.com',
         style: TextStyle(color: Colors.white),
       ),
-      trailing: Icon(Icons.arrow_forward),
+      trailing: enableOnTap? Icon(Icons.arrow_forward): null,
     );
   }
 }
