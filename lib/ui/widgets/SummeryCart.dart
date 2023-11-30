@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class SummeryCart extends StatelessWidget {
   const SummeryCart({
     super.key,
