@@ -1,13 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/data/network_caller.dart';
+import 'package:task_manager/utility/urls.dart';
 
 import '../../data/model/task.dart';
 
-class TaskitemCard extends StatelessWidget {
+enum TaskStatus{
+  New,
+  Progress,
+  Completed,
+  Cancelled,
+}
+
+class TaskitemCard extends StatefulWidget {
   const TaskitemCard({
-    super.key, required this.task,
+    super.key, required this.task, required this.onStatusChange, required this.showProgress,
   });
 
   final Task task;
+  final VoidCallback onStatusChange;
+  final Function(bool) showProgress;
+
+  @override
+  State<TaskitemCard> createState() => _TaskitemCardState();
+}
+
+class _TaskitemCardState extends State<TaskitemCard> {
+
+Future<void>updateTaskStatus(String status)async{
+  widget.showProgress(true);
+final response = await NetworkCaller().getRequest(Urls.updateTaskStatus(widget.task.sId??'', status));
+if(response.isSuccess){
+  widget.onStatusChange();
+}
+  widget.showProgress(true);
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +46,30 @@ class TaskitemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              task.title??'',
+              widget.task.title??'',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-            Text(task.description??''),
-            Text('Date: ${task.createdDate}'),
+            Text(widget.task.description??''),
+            Text('Date: ${widget.task.createdDate}'),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Chip(
                   label: Text(
-                    task.status??'New',
+                    widget.task.status??'New',
                     style: TextStyle(color: Colors.white),
                   ),
                   backgroundColor: Colors.blue,
                 ),
                 Wrap(
                   children: [
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.delete_forever_outlined)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                    // IconButton(
+                    //     onPressed: () {},
+                    //     icon: Icon(Icons.delete_forever_outlined)),
+                    IconButton(onPressed: () {
+
+                      ShowUpdateStatusModel();
+                    }, icon: Icon(Icons.edit)),
                   ],
                 )
               ],
@@ -49,6 +79,39 @@ class TaskitemCard extends StatelessWidget {
       ),
     );
   }
+
+
+void ShowUpdateStatusModel() {
+
+  List<ListTile> items = TaskStatus.values.
+      map((e) =>
+      ListTile(
+        title: Text(e.name),
+        onTap: (){
+          updateTaskStatus(e.name);
+          Navigator.pop(context);
+        },
+      )).toList();
+  showDialog(context: context, builder: (context)
+  {
+    return AlertDialog(
+      title: Text('Update Status'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: items,
+      ),
+      actions: [ButtonBar(
+        children: [
+          TextButton(onPressed: (){
+            Navigator.pop(context);
+          }, child: Text('Cancle',style: TextStyle(color: Colors.grey),)),
+          // TextButton(onPressed: (){}, child: Text('Update')),
+        ],
+      )],
+    );
+  });
+  }
+
 }
 
 
