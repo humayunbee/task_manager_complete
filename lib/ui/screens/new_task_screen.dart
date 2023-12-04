@@ -27,7 +27,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     }
     final NetworkResponse response = await NetworkCaller().getRequest(Urls.getNewTasks);
     if(response.isSuccess){
-      // taskListModel = TaskListModel.fromJson(response.jsonResponse);
+       taskListModel = TaskListModel.fromJson(response.jsonResponse!);
     }
     getNewTaskInProgress = false;
     if (mounted) {
@@ -90,11 +90,11 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                 visible: getNewTaskInProgress == false,
                 replacement: const Center(child: CircularProgressIndicator()),
                 child: ListView.builder(
-                  // itemCount: taskListModel.data?.length??0,
+                  itemCount: taskListModel.taskList?.length??0,
                   itemBuilder: (context, index) {
-                    // return TaskitemCard(
-                    //   task: taskListModel.taskList![index],
-                    // );
+                    return TaskitemCard(
+                      task: taskListModel.taskList![index],
+                    );
                   },
                 ),
               ),

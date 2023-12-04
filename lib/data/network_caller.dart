@@ -82,9 +82,7 @@ class NetworkCaller {
       return NetworkResponse(isSuccess: false, errorMessage: e.toString());
     }
   }
-
 }
-
 
 void backToLogin() async {
   await AuthController.clearAuthData();
