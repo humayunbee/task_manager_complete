@@ -11,6 +11,7 @@ class Urls{
   static const String getCompletedTasks = '$_baseurl/listTaskByStatus/Completed';
   static const String getCancelTasks = '$_baseurl/listTaskByStatus/Cancelled';
   static const String getTaskStatusCount = '$_baseurl/taskStatusCount';
+  static const String updateProfile = '$_baseurl/profileUpdate';
   // static String getNewTasks = '$_baseurl/listTaskByStatus/${TaskStatus.New.name}';
   // static String getProgressTasks = '$_baseurl/listTaskByStatus/${TaskStatus.Progress.name}';
   static String updateTaskStatus(String taskId, String status) => '$_baseurl/updateTaskStatus/$taskId/$status';
